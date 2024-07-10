@@ -1,7 +1,9 @@
 from face_recognition import FaceRecognition
+from gui import create_gui
 import cv2
 
 if __name__ == "__main__":
+    create_gui()
     training_folder = 'images/training_folder'
     test_image_path = 'images/test.jpg'
     
