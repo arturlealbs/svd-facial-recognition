@@ -50,11 +50,7 @@ class FolderImageSelector(tk.Tk):
             self.folder_entry.insert(0, folder_path)
     
     def select_image(self):
-<<<<<<< HEAD
         image_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg *.jpeg *.png *.gif *.bmp")])
-=======
-        image_path = filedialog.askopenfilename(filetypes=[("Image files", "*.*")])
->>>>>>> 234adc753a9029778d2f4bd4e61ae0a78bbbd0a8
         if image_path:
             self.image_entry.delete(0, tk.END)
             self.image_entry.insert(0, image_path)
