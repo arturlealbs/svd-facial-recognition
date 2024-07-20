@@ -12,6 +12,8 @@ class FaceRecognition:
         self.U = None
         self.coordinate_vectors = None
         self.load_training_data()
+    
+
 
     def load_images_from_folder(self, folder):
         images = []
@@ -26,8 +28,8 @@ class FaceRecognition:
 
     def compute_svd(self, A, mean_face):
         A_centered = A - mean_face[:, None]
-        return np.linalg.svd(A_centered, full_matrices=False)
-        #return svd.svd(A_centered)
+        # return np.linalg.svd(A_centered, full_matrices=False)
+        return svd.svd(A_centered)
 
     def compute_coordinate_vectors(self, U, A, mean_face):
         A_centered = A - mean_face[:, None]
