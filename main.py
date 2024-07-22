@@ -1,4 +1,3 @@
-import tkinter as tk
 import cv2
 from face_recognition import FaceRecognition
 from gui import FolderImageSelector
