@@ -18,7 +18,9 @@ class FaceRecognition:
 
     def load_images_from_folder(self, folder):
         images = []
-        for filename in os.listdir(folder):
+        files_list = os.listdir(folder)
+        files_list.sort()
+        for filename in files_list:
             img = cv2.imread(os.path.join(folder, filename), cv2.IMREAD_GRAYSCALE)
             if img is not None:
                 if self.h == 0 or self.w == 0:
@@ -54,7 +56,7 @@ class FaceRecognition:
         x = self.U.T @ test_image_centered
         pf = self.U @ x
         ef = np.linalg.norm(test_image_centered - pf)
-
+        print(ef)
         
         if ef > self.threshold_1:
             print(f"{ef=}")
