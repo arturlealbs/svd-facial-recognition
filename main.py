@@ -21,6 +21,7 @@ if __name__ == "__main__":
         else:
             gui.show_image(test_image_path)
             gui.show_image_by_id(training_folder_path, identified_face)
+
             
 
     app = FolderImageSelector(execute_callback=execute_face_recognition)

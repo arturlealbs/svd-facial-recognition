@@ -58,6 +58,9 @@ class FolderImageSelector(tk.Tk):
         self.result_image_label = tk.Label(self)
         self.result_image_label.grid(row=6, column=0, columnspan=3, padx=10, pady=5)
 
+        self.error_label = tk.Label(self)
+        self.error_label.grid(row=7, column=1)
+
     
     def select_folder(self):
         folder_path = filedialog.askdirectory()
@@ -105,3 +108,6 @@ class FolderImageSelector(tk.Tk):
             self.result_image_label.config(image=img)
             self.result_image_label.image = img 
             self.result_image_text.config(text="Rosto Identificado")
+
+    def show_error(self, error):
+        self.error_label.config(text=str(error))

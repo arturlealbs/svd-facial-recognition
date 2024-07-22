@@ -57,13 +57,13 @@ class FaceRecognition:
         
         if ef > self.threshold_1:
             print(f"{ef=}")
-            return "Not a face", None
+            return "Not a face"
 
         distances = np.linalg.norm(self.coordinate_vectors - x[:, None], axis=0)
         min_distance = np.min(distances)
 
         print(f"{min_distance=}")
         if min_distance < self.threshold_0:
-            return np.argmin(distances), min_distance
+            return np.argmin(distances)
         else:
-            return "Unknown face", None
+            return "Unknown face"
