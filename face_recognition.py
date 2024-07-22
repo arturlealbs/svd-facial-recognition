@@ -46,7 +46,8 @@ class FaceRecognition:
         self.coordinate_vectors = self.compute_coordinate_vectors(self.U, A, self.mean_face)
 
     def identify_face(self, test_image):
-        #test_image = cv2.resize(test_image, (self.h , self.w))
+        print(test_image.shape[0], test_image.shape[1])
+        test_image = cv2.resize(test_image, (self.w , self.h))
         print(test_image.shape[0], test_image.shape[1])
         test_image_flat = test_image.flatten()
         test_image_centered = test_image_flat - self.mean_face
@@ -57,7 +58,7 @@ class FaceRecognition:
         
         if ef > self.threshold_1:
             print(f"{ef=}")
-            return "Não é um rosto", None
+            return "Not a face", None
 
         distances = np.linalg.norm(self.coordinate_vectors - x[:, None], axis=0)
         min_distance = np.min(distances)
@@ -66,4 +67,4 @@ class FaceRecognition:
         if min_distance < self.threshold_0:
             return np.argmin(distances), min_distance
         else:
-            return "Rosto desconhecido", None
+            return "Unknown face", None

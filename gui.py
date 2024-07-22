@@ -43,9 +43,6 @@ class FolderImageSelector(tk.Tk):
         self.grid_columnconfigure(1, weight=1)
         self.grid_columnconfigure(2, weight=1)
 
-        self.not_found_label = tk.Label(self)
-        self.not_found_label.grid(row=3, column=1)
-
         # Labels for images
         self.test_image_text = tk.Label(self)
         self.test_image_text.grid(row=3, column=0, columnspan=3, padx=10, pady=5)
@@ -61,9 +58,12 @@ class FolderImageSelector(tk.Tk):
         self.result_image_label = tk.Label(self)
         self.result_image_label.grid(row=6, column=0, columnspan=3, padx=10, pady=5)
 
+
+        self.not_found_label = tk.Label(self)
+        self.not_found_label.grid(row=3, column=1)
+
         self.error_label = tk.Label(self)
         self.error_label.grid(row=7, column=1)
-
     
     def select_folder(self):
         folder_path = filedialog.askdirectory()
@@ -88,13 +88,13 @@ class FolderImageSelector(tk.Tk):
     def show_image(self, image_path):
         img = cv2.imread(image_path)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  
-        img = cv2.resize(img, (400, 400))  
+        img = cv2.resize(img, (336, 384))  
         img = Image.fromarray(img)
         img = ImageTk.PhotoImage(image=img)
 
         self.input_image_label.config(image=img)
         self.input_image_label.image = img
-        self.test_image_text.config(text="Imagem de Teste")
+        self.test_image_text.config(text="Imagem de Teste:")
 
     def show_image_by_id(self, folder_path, image_id):
 
@@ -104,16 +104,17 @@ class FolderImageSelector(tk.Tk):
             image_path = os.path.join(folder_path, image_files[image_id])
             img = cv2.imread(image_path)
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  
-            img = cv2.resize(img, (400, 400))  
+            img = cv2.resize(img, (336, 384))  
             img = Image.fromarray(img)
             img = ImageTk.PhotoImage(image=img)
             
             self.result_image_label.config(image=img)
             self.result_image_label.image = img 
-            self.result_image_text.config(text="Rosto Identificado")
+            self.result_image_text.config(text="Rosto Identificado:")
 
     def show_not_found_label(self, message):
         self.not_found_label.config(text=message)
 
     def show_error(self, error):
         self.error_label.config(text=f"Erro: {error:.2f}".replace('.', ','))
+
