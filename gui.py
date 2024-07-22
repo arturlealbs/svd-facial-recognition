@@ -37,11 +37,27 @@ class FolderImageSelector(tk.Tk):
         
         # Execute button
         execute_button = tk.Button(self, text="Execute", command=self.execute_function)
-        execute_button.grid(row=2, columnspan=3, pady=10)
+        execute_button.grid(row=2, column=0, columnspan=3, pady=10)
+        
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_columnconfigure(2, weight=1)
 
-        # Image display
-        self.image_label = tk.Label(self)
-        self.image_label.grid(row=3, columnspan=3, pady=10)
+        # Labels for images
+        self.test_image_text = tk.Label(self)
+        self.test_image_text.grid(row=3, column=0, columnspan=3, padx=10, pady=5)
+
+        self.result_image_text = tk.Label(self)
+        self.result_image_text.grid(row=5, column=0, columnspan=3, padx=10, pady=5)
+
+        # Test Image Display
+        self.input_image_label = tk.Label(self)
+        self.input_image_label.grid(row=4, column=0, columnspan=3, padx=10, pady=5)
+
+        # Result Image display
+        self.result_image_label = tk.Label(self)
+        self.result_image_label.grid(row=6, column=0, columnspan=3, padx=10, pady=5)
+
     
     def select_folder(self):
         folder_path = filedialog.askdirectory()
@@ -63,6 +79,17 @@ class FolderImageSelector(tk.Tk):
         else:
             messagebox.showwarning("Warning", "Please select both a folder and an image.")
     
+    def show_image(self, image_path):
+        img = cv2.imread(image_path)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  
+        img = cv2.resize(img, (400, 400))  
+        img = Image.fromarray(img)
+        img = ImageTk.PhotoImage(image=img)
+
+        self.input_image_label.config(image=img)
+        self.input_image_label.image = img
+        self.test_image_text.config(text="Imagem de Teste")
+
     def show_image_by_id(self, folder_path, image_id):
 
         image_files = sorted([f for f in os.listdir(folder_path) if f.lower().endswith(('png', 'jpg', 'jpeg', 'bmp'))])
@@ -75,5 +102,6 @@ class FolderImageSelector(tk.Tk):
             img = Image.fromarray(img)
             img = ImageTk.PhotoImage(image=img)
             
-            self.image_label.config(image=img)
-            self.image_label.image = img 
+            self.result_image_label.config(image=img)
+            self.result_image_label.image = img 
+            self.result_image_text.config(text="Rosto Identificado")
