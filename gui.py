@@ -43,6 +43,9 @@ class FolderImageSelector(tk.Tk):
         self.grid_columnconfigure(1, weight=1)
         self.grid_columnconfigure(2, weight=1)
 
+        self.not_found_label = tk.Label(self)
+        self.not_found_label.grid(row=3, column=1)
+
         # Labels for images
         self.test_image_text = tk.Label(self)
         self.test_image_text.grid(row=3, column=0, columnspan=3, padx=10, pady=5)
@@ -109,5 +112,8 @@ class FolderImageSelector(tk.Tk):
             self.result_image_label.image = img 
             self.result_image_text.config(text="Rosto Identificado")
 
+    def show_not_found_label(self, message):
+        self.not_found_label.config(text=message)
+
     def show_error(self, error):
-        self.error_label.config(text=str(error))
+        self.error_label.config(text=f"Erro: {error:.2f}".replace('.', ','))
