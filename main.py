@@ -4,7 +4,7 @@ from gui import FolderImageSelector
 
 if __name__ == "__main__":
     def execute_face_recognition(training_folder_path, test_image_path, gui):
-        face_recognition = FaceRecognition(training_folder_path, threshold_0=7500, threshold_1=1500) 
+        face_recognition = FaceRecognition(training_folder_path, threshold_0=7500, threshold_1=10000) 
 
         test_image = cv2.imread(test_image_path, cv2.IMREAD_GRAYSCALE)
         identified_face, error = face_recognition.identify_face(test_image)
@@ -17,7 +17,7 @@ if __name__ == "__main__":
             gui.show_image(test_image_path)
             gui.show_image_by_id(training_folder_path, identified_face)
             gui.show_error(error)
-
+    
     app = FolderImageSelector(execute_callback=execute_face_recognition)
     app.mainloop()
 

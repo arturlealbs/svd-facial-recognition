@@ -9,6 +9,7 @@ import customtkinter as ctk
 class FolderImageSelector(ctk.CTk):
     def __init__(self, execute_callback):
         super().__init__()
+        
         self.geometry("1x1")
         
         self.title("Folder and Image Selector")
@@ -21,15 +22,11 @@ class FolderImageSelector(ctk.CTk):
         self.big_frame = ctk.CTkFrame(self)
         #self.big_frame.configure(fg_color="white")
         self.big_frame.pack(fill="both", expand=True)
-        #self.big_frame.grid_rowconfigure(0, weight=1)  # configure grid system
-        #self.big_frame.grid_columnconfigure(0, weight=0)
-        #self.big_frame.grid_columnconfigure(1, weight=1)
-        #self.big_frame.grid(row=0, column=0, sticky="news")
+
         self.left_frame = ctk.CTkFrame(self.big_frame)
-        #self.big_frame.propagate(0)
-        #self.left_frame.propagate(0)
+
         self.left_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nw")
-        #self.left_frame.pack(fill="both", expand=True)
+
 
         # Folder selection
         folder_label = ctk.CTkLabel(self.left_frame, text="Training folder:", anchor='w')
@@ -85,25 +82,19 @@ class FolderImageSelector(ctk.CTk):
         self.error_label = ctk.CTkLabel(self.left_frame, text="")
         self.error_label.grid(row=3, column=0)
         self.error_label.grid_remove()
-
-        #self.big_frame.grid_columnconfigure(0, weight=1)
-        #self.big_frame.grid_columnconfigure(1, weight=1)
-        #self.grid_columnconfigure(0, weight=1)
-        #self.grid_rowconfigure(0, weight=1)
-        #self.big_frame.propagate(0)
-        #self.right_frame.propagate(0)
         self.update_size()
     
     def update_size(self):
         self.big_frame.update_idletasks()
-        width = self.big_frame.winfo_reqwidth() - 90
-        height = self.big_frame.winfo_reqheight() - 60
-        if(self.right_frame.winfo_ismapped()):
-            height -= 40
-            width -= 75
-            if(self.result_image_label.winfo_ismapped()):
-                width -= 75
-
+        # width = self.big_frame.winfo_reqwidth() - 90
+        # height = self.big_frame.winfo_reqheight() - 60
+        # if(self.right_frame.winfo_ismapped()):
+        #     height -= 40
+        #     width -= 75
+        #     if(self.result_image_label.winfo_ismapped()):
+        #         width -= 75
+        width = self.big_frame.winfo_reqwidth() 
+        height = self.big_frame.winfo_reqheight()
         self.geometry(f"{width}x{height}")
 
     def select_folder(self):
