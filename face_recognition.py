@@ -22,8 +22,6 @@ class FaceRecognition:
         files_list.sort()
         for filename in files_list:
             img = cv2.imread(os.path.join(folder, filename), cv2.IMREAD_GRAYSCALE)
-            if len(images) >= 200:
-                break
             if img is not None:
                 if self.h == 0 or self.w == 0:
                     self.h, self.w = img.shape
