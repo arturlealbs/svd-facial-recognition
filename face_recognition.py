@@ -22,6 +22,7 @@ class FaceRecognition:
         files_list.sort()
         for filename in files_list:
             img = cv2.imread(os.path.join(folder, filename), cv2.IMREAD_GRAYSCALE)
+            img = cv2.equalizeHist(img)
             if img is not None:
                 if self.h == 0 or self.w == 0:
                     self.h, self.w = img.shape
